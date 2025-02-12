@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin NGO Approval</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #111827;
+            color: white;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .ngo-card {
+            background-color: #1F2937;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .ngo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .ngo-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .blurred {
+            filter: blur(4px);
+            user-select: none;
+        }
+
+        .blurred-img {
+            filter: blur(8px);
+            user-select: none;
+        }
+
+        .status {
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .approved { color: #0db1d2; }
+        .pending { color: #9CA3AF; }
+        .rejected { color: #EF4444; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .section-title {
+            color: #9CA3AF;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .doc-preview {
+            position: relative;
+            background-color: #000000;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        .preview-img {
+            width: 200px;
+            height: 500px;
+            object-fit: fill;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .doc-preview:hover .preview-img:not(.blurred-img) {
+            opacity: 1;
+        }
+
+        .preview-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 8px;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .disabled .preview-img {
+            opacity: 0.3;
+        }
+
+        .video-preview {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 12px;
+            border-radius: 50%;
+        }
+
+        .icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin NGO Approval</h1>
+
+        <!-- Wings of Hope (Approved) -->
+        <div class="ngo-card">
+            <div class="ngo-header">
+                <div>
+                    <div class="ngo-title">Wings of Hope</div>
+                    <div class="status approved">Approved - High Transparency</div>
+                </div>
+                <i data-feather="check-circle" class="approved"></i>
+            </div>
+            <div class="grid">
+                <div>
+                    <div class="section-title">Financials</div>
+                    <div class="doc-preview">
+                        <img src="data:image/jpeg;base64,/9j/spreadsheet1.jpg" 
+                             alt="Administrative Financial Document" 
+                             class="preview-img">
+                        <div class="preview-label">
+                            <span>Administrative</span>
+                            <i data-feather="download"></i>
+                        </div>
+                    </div>
+                    <div class="doc-preview">
+                        <img src="data:image/jpeg;base64,/9j/chart1.jpg" 
+                             alt="Transactional Financial Document" 
+                             class="preview-img">
+                        <div class="preview-label">
+                            <span>Transactional</span>
+                            <i data-feather="download"></i>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="section-title">Video Surveys</div>
+                    <div class="doc-preview video-preview">
+                        <img src="data:image/jpeg;base64,/9j/president1.jpg" 
+                             alt="President Video" 
+                             class="preview-img">
+                        <div class="preview-label">
+                            <span>President</span>
+                            <i data-feather="play-circle"></i>
+                        </div>
+                        <div class="play-overlay">
+                            <i data-feather="play"></i>
+                        </div>
+                    </div>
+                    <div class="doc-preview video-preview">
+                        <img src="data:image/jpeg;base64,/9j/beneficiary1.jpg" 
+                             alt="Beneficiary Video" 
+                             class="preview-img">
+                        <div class="preview-label">
+                            <span>Beneficiary</span>
+                            <i data-feather="play-circle"></i>
+                        </div>
+                        <div class="play-overlay">
+                            <i data-feather="play"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IHCNJ (Pending) -->
+        <div class="ngo-card">
+            <div class="ngo-header">
+                <div>
+                    <div class="ngo-title">IHCNJ</div>
+                    <div class="status pending">Pending Review</div>
+                </div>
+                <i data-feather="minus-circle" class="pending"></i>
+            </div>
+            <div class="grid">
+                <div>
+                    <div class="section-title">Financials</div>
+                    <div class="doc-preview">
+                        <img src="data:image/jpeg;base64,/9j/spreadsheet2.jpg" 
+                             alt="Administrative Financial Document" 
+                             class="preview-img">
+                        <div class="preview-label">
+                            <span>Administrative</span>
+                            <i data-feather="download"></i>
+                        </div>
+                    </div>
+                    <div class="doc-preview">
+                        <div class="preview-label">
+                            <span>Transactional</span>
+                            <div class="approval-status pending">Approval Pending</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="section-title">Video Surveys</div>
+                    <div class="doc-preview video-preview">
+                        <img src="data:image/jpeg;base64,/9j/president2.jpg" 
+                             alt="President Video" 
+                             class="preview-img">
+                        <div class="preview-label">
+                            <span>President</span>
+                            <i data-feather="play-circle"></i>
+                        </div>
+                        <div class="play-overlay">
+                            <i data-feather="play"></i>
+                        </div>
+                    </div>
+                    <div class="doc-preview">
+                        <div class="approval-pending">Approval Pending</div>
+                        <div class="preview-label">
+                            <span>Beneficiary</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rejected NGO -->
+        <div class="ngo-card">
+            <div class="ngo-header">
+                <div>
+                    <div class="ngo-title blurred">Sustainaable</div>
+                    <div class="status rejected">Not approved, low trackable metrics</div>
+                </div>
+                <i data-feather="x-circle" class="rejected"></i>
+            </div>
+            <div class="grid">
+                <div>
+                    <div class="section-title">Financials</div>
+                    <div class="doc-preview">
+                        <img src="data:image/jpeg;base64,/9j/spreadsheet3.jpg" 
+                             alt="Administrative Financial Document" 
+                             class="preview-img blurred-img">
+                        <div class="preview-label">
+                            <span>Administrative</span>
+                            <i data-feather="download"></i>
+                        </div>
+                    </div>
+                    <div class="doc-preview">
+                        <img src="data:image/jpeg;base64,/9j/chart3.jpg" 
+                             alt="Transactional Financial Document" 
+                             class="preview-img blurred-img">
+                        <div class="preview-label">
+                            <span>Transactional</span>
+                            <i data-feather="download"></i>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="section-title">Video Surveys</div>
+                    <div class="doc-preview video-preview">
+                        <img src="data:image/jpeg;base64,/9j/president3.jpg" 
+                             alt="President Video" 
+                             class="preview-img blurred-img">
+                        <div class="preview-label">
+                            <span>President</span>
+                            <i data-feather="play-circle"></i>
+                        </div>
+                        <div class="play-overlay">
+                            <i data-feather="play"></i>
+                        </div>
+                    </div>
+                    <div class="doc-preview disabled">
+                        <img src="data:image/jpeg;base64,/9j/beneficiary3.jpg" 
+                             alt="Beneficiary Video" 
+                             class="preview-img blurred-img">
+                        <div class="preview-label">
+                            <span>Beneficiary</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <!-- Rejected NGO -->
+         <div class="ngo-card">
+            <div class="ngo-header">
+                <div>
+                    <div class="ngo-title blurred">Catalyst for Action</div>
+                    <div class="status rejected">Not approved, high administrative costs</div>
+                </div>
+                <i data-feather="x-circle" class="rejected"></i>
+            </div>
+            <div class="grid">
+                <div>
+                    <div class="section-title">Financials</div>
+                    <div class="doc-preview">
+                        <img src="data:image/jpeg;base64,/9j/spreadsheet3.jpg" 
+                             alt="Administrative Financial Document" 
+                             class="preview-img blurred-img">
+                        <div class="preview-label">
+                            <span>Administrative</span>
+                            <i data-feather="download"></i>
+                        </div>
+                    </div>
+                    <div class="doc-preview">
+                        <img src="data:image/jpeg;base64,/9j/chart3.jpg" 
+                             alt="Transactional Financial Document" 
+                             class="preview-img blurred-img">
+                        <div class="preview-label">
+                            <span>Transactional</span>
+                            <i data-feather="download"></i>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="section-title">Video Surveys</div>
+                    <div class="doc-preview video-preview">
+                        <img src="data:image/jpeg;base64,/9j/president3.jpg" 
+                             alt="President Video" 
+                             class="preview-img blurred-img">
+                        <div class="preview-label">
+                            <span>President</span>
+                            <i data-feather="play-circle"></i>
+                        </div>
+                        <div class="play-overlay">
+                            <i data-feather="play"></i>
+                        </div>
+                    </div>
+                    <div class="doc-preview disabled">
+                        <img src="data:image/jpeg;base64,/9j/beneficiary3.jpg" 
+                             alt="Beneficiary Video" 
+                             class="preview-img blurred-img">
+                        <div class="preview-label">
+                            <span>Beneficiary</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
